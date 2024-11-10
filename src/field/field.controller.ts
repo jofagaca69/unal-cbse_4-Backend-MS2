@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { FieldService } from './field.service';
 import { Field } from './field.entity';
-
 
 @Controller('field')
 export class FieldController {
@@ -24,5 +23,15 @@ export class FieldController {
     },
   ): Promise<Field> {
     return await this.fieldService.createField(data);
+  }
+
+  @Get('')
+  async getAllFields() {
+    return await this.fieldService.getAllFields();
+  }
+
+  @Delete(':id')
+  async deleteFieldById(@Param('id') id: number) {
+    return await this.fieldService.deleteFieldById(id);
   }
 }
